@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flower Garden for You 🌸</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #ffe4ec, #fff9f0);
+    overflow: hidden;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .flower {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    pointer-events: none;
+    animation: grow 0.5s ease-out forwards;
+  }
+
+  @keyframes grow {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+  }
+
+  .heart {
+    position: absolute;
+    font-size: 20px;
+    color: red;
+    animation: floatUp 4s linear forwards;
+    pointer-events: none;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
+  }
+
+  .message {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    color: #d63384;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px white;
+  }
+</style>
+</head>
+<body>
+
+<div class="message">For my Tiny Minion 😚💖</div>
+
+<script>
+  // Colorful pastel SVG flowers (Base64 encoded)
+  const flowers = [
+    "data:image/svg+xml;base64," + btoa(`<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60">
+      <circle cx="30" cy="15" r="10" fill="#ff99c8"/>
+      <circle cx="45" cy="30" r="10" fill="#ff99c8"/>
+      <circle cx="30" cy="45" r="10" fill="#ff99c8"/>
+      <circle cx="15" cy="30" r="10" fill="#ff99c8"/>
+      <circle cx="30" cy="30" r="12" fill="#ffb3c6"/>
+    </svg>`),
+
+    "data:image/svg+xml;base64," + btoa(`<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60">
+      <circle cx="30" cy="12" r="9" fill="#cdb4db"/>
+      <circle cx="48" cy="30" r="9" fill="#cdb4db"/>
+      <circle cx="30" cy="48" r="9" fill="#cdb4db"/>
+      <circle cx="12" cy="30" r="9" fill="#cdb4db"/>
+      <circle cx="30" cy="30" r="11" fill="#ffc8dd"/>
+    </svg>`),
+
+    "data:image/svg+xml;base64," + btoa(`<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60">
+      <circle cx="30" cy="10" r="8" fill="#ffafcc"/>
+      <circle cx="50" cy="30" r="8" fill="#ffafcc"/>
+      <circle cx="30" cy="50" r="8" fill="#ffafcc"/>
+      <circle cx="10" cy="30" r="8" fill="#ffafcc"/>
+      <circle cx="30" cy="30" r="10" fill="#bde0fe"/>
+    </svg>`)
+  ];
+
+  document.body.addEventListener("click", (e) => {
+    createFlower(e.clientX, e.clientY);
+    createHeart(e.clientX, e.clientY);
+  });
+
+  function createFlower(x, y) {
+    const flower = document.createElement("img");
+    flower.src = flowers[Math.floor(Math.random() * flowers.length)];
+    flower.className = "flower";
+    flower.style.left = (x - 30) + "px";
+    flower.style.top = (y - 30) + "px";
+    document.body.appendChild(flower);
+  }
+
+  function createHeart(x, y) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+    heart.textContent = "💖";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 4000);
+  }
+</script>
+
+</body>
+</html>
